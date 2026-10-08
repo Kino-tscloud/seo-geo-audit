@@ -280,6 +280,8 @@
       if (p) { p.set(4, 'done'); setTimeout(() => p.hide(), 600); }
       render(report);
       pushRecent(report);
+      // 通知 Supabase 模組（index.html 內的 module script）有新報告
+      document.dispatchEvent(new CustomEvent('audit:done', { detail: report }));
       if (ctx.rendered) {
         alertMsg('原始 HTML 代理無法使用，已改用 Jina Reader 讀取「瀏覽器渲染後」的頁面；「伺服器端可讀內容」與 DOCTYPE 項目不予計分。若要最精準的結果，請改用「貼上原始碼」。', 'warn');
       } else if (ctx.via && ctx.via !== 'direct') {

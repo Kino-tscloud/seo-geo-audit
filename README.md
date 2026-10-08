@@ -17,3 +17,8 @@ robots.txt / llms.txt
 - **網址檢測**：透過公開 CORS 代理（allorigins / corsproxy.io / codetabs）讀取頁面與 robots.txt、sitemap.xml、llms.txt。
 - **貼上原始碼**：網站擋代理時使用，在目標頁按 Ctrl+U 複製原始碼貼上。
 - 支援網址參數：`index.html?url=https://example.com&kw=關鍵字`
+
+## 資料庫（Supabase）
+- 資料表 `audits`：使用者按「分享」才寫入的公開檢測紀錄（網址、關鍵字、三項分數、備註）。
+- RLS：任何人可讀取、可新增；不開放修改與刪除；欄位有長度與分數範圍限制。
+- 網頁只使用可公開的 Publishable key（寫在 index.html 底部的 module script），不含任何 secret / service_role key。

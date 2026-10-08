@@ -25,7 +25,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@500;600&display=swap">
-  <link rel="stylesheet" href="css/style.css?v=3">
+  <link rel="stylesheet" href="css/style.css?v=4">
   <script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',JSON.parse(t))}catch(e){}</script>
 
   <script type="application/ld+json">
@@ -181,6 +181,18 @@
         </div>
         <div class="stat-row" id="statRow"></div>
 
+        <form class="card share-card no-print" id="shareForm" novalidate>
+          <div class="share-txt">
+            <h3>📢 分享到公開檢測紀錄</h3>
+            <p>會公開這次的網址、關鍵字與三項分數，讓其他人參考。不按就不會上傳。</p>
+          </div>
+          <div class="share-row">
+            <input class="input" id="shareNote" type="text" maxlength="200" placeholder="備註（選填，例如：改版前）" aria-label="備註">
+            <button class="btn btn-primary" id="shareBtn" type="submit">分享</button>
+          </div>
+          <p class="share-msg" id="shareMsg" role="status"></p>
+        </form>
+
         <nav class="tabs" id="tabs" aria-label="報告分頁">
           <button class="active" data-tab="overview">總覽</button>
           <button data-tab="checks">詳細檢查 <span class="count" id="cntChecks"></span></button>
@@ -238,6 +250,22 @@
 
         <div class="tab-panel" data-panel="data">
           <div id="dataList" class="stack"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 公開檢測紀錄（Supabase） ================= -->
+    <section class="section" id="community" style="padding-top:30px">
+      <div class="container">
+        <span class="kicker reveal">Live data</span>
+        <h2 class="reveal">大家最近的 <span class="grad">公開檢測</span></h2>
+        <p class="sub reveal">使用者主動分享的健檢結果，即時從資料庫讀取。點「再測一次」可用同一個網址重新檢測。</p>
+        <div class="card reveal">
+          <div class="feed-head">
+            <span class="small muted" id="feedStatus">載入中…</span>
+            <button class="btn btn-ghost btn-sm" id="feedReload" type="button">↻ 重新整理</button>
+          </div>
+          <div class="feed" id="feed"></div>
         </div>
       </div>
     </section>
@@ -335,6 +363,104 @@
 
   <script src="js/audit.js?v=3" defer></script>
   <script src="js/demo.js?v=3" defer></script>
-  <script src="js/app.js?v=3" defer></script>
+  <script src="js/app.js?v=4" defer></script>
+
+  <!-- Supabase：公開檢測紀錄（讀取 + 新增）。只使用可公開的 Publishable key，權限由資料庫 RLS 控管 -->
+  <script type="module">
+    import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+
+    const SUPABASE_URL = 'https://xiilzcxgvyqlgdrpxnfw.supabase.co';
+    const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_tTvsEah6EV1dMxjjAZ8seQ_aMM5N1EG';
+    const db = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, { auth: { persistSession: false } });
+
+    const $ = s => document.querySelector(s);
+    const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    const tone = n => n >= 80 ? 'good' : n >= 50 ? 'warn' : 'bad';
+    const ago = iso => {
+      const s = (Date.now() - new Date(iso)) / 1000;
+      if (s < 60) return '剛剛';
+      if (s < 3600) return Math.floor(s / 60) + ' 分鐘前';
+      if (s < 86400) return Math.floor(s / 3600) + ' 小時前';
+      if (s < 86400 * 30) return Math.floor(s / 86400) + ' 天前';
+      return new Date(iso).toLocaleDateString('zh-TW');
+    };
+
+    /* ---- 讀取 ---- */
+    async function loadFeed() {
+      $('#feedStatus').textContent = '載入中…';
+      const { data, error } = await db.from('audits')
+        .select('id, created_at, url, keyword, overall, seo_score, geo_score, note')
+        .order('created_at', { ascending: false })
+        .limit(20);
+      if (error) {
+        $('#feedStatus').textContent = '讀取失敗：' + error.message;
+        return;
+      }
+      $('#feedStatus').textContent = data.length ? `最新 ${data.length} 筆` : '還沒有人分享，做完健檢後成為第一個吧！';
+      $('#feed').innerHTML = data.map(r => {
+        let host = '（貼上原始碼檢測）';
+        try { if (r.url) host = new URL(r.url).hostname.replace(/^www\./, ''); } catch (e) { }
+        return `<div class="feed-item">
+          <div class="fi-main">
+            <div class="fi-host">${r.url ? `<a href="${esc(r.url)}" target="_blank" rel="nofollow noopener ugc">${esc(host)}</a>` : esc(host)}</div>
+            <div class="fi-meta">${r.keyword ? `🎯 ${esc(r.keyword)} · ` : ''}${esc(ago(r.created_at))}</div>
+            ${r.note ? `<div class="fi-note">💬 ${esc(r.note)}</div>` : ''}
+          </div>
+          <div class="fi-scores">
+            <span class="bg-${tone(r.overall)}" title="綜合">${r.overall}</span>
+            <span class="c-${tone(r.seo_score)}" title="SEO">SEO ${r.seo_score}</span>
+            <span class="c-${tone(r.geo_score)}" title="GEO">GEO ${r.geo_score}</span>
+          </div>
+          ${r.url ? `<button class="btn btn-ghost btn-sm fi-retest" type="button" data-url="${esc(r.url)}">再測一次</button>` : ''}
+        </div>`;
+      }).join('');
+    }
+
+    /* ---- 新增 ---- */
+    let current = null, shared = false;
+    document.addEventListener('audit:done', e => {
+      current = e.detail; shared = false;
+      $('#shareBtn').disabled = false;
+      $('#shareBtn').textContent = '分享';
+      $('#shareNote').value = '';
+      $('#shareMsg').textContent = '';
+    });
+    $('#shareForm').addEventListener('submit', async e => {
+      e.preventDefault();
+      if (!current || shared) return;
+      const btn = $('#shareBtn');
+      btn.disabled = true; btn.textContent = '分享中…';
+      const row = {
+        url: /^https?:\/\//i.test(current.url || '') ? current.url.slice(0, 500) : null,
+        keyword: (current.keyword || '').slice(0, 100) || null,
+        overall: current.overall,
+        seo_score: current.seoScore,
+        geo_score: current.geoScore,
+        note: $('#shareNote').value.trim().slice(0, 200) || null
+      };
+      const { error } = await db.from('audits').insert(row);
+      if (error) {
+        btn.disabled = false; btn.textContent = '分享';
+        $('#shareMsg').textContent = '分享失敗：' + error.message;
+        return;
+      }
+      shared = true;
+      btn.textContent = '✓ 已分享';
+      $('#shareMsg').textContent = '已加入下方「大家最近的公開檢測」。';
+      loadFeed();
+    });
+
+    $('#feedReload').addEventListener('click', loadFeed);
+    $('#feed').addEventListener('click', e => {
+      const b = e.target.closest('.fi-retest');
+      if (!b) return;
+      document.querySelector('.mode-tabs [data-mode="url"]').click();
+      $('#urlInput').value = b.dataset.url;
+      $('#auditForm').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      $('#auditForm').requestSubmit();
+    });
+
+    loadFeed();
+  </script>
 </body>
 </html>
