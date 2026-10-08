@@ -454,6 +454,7 @@
         <div class="ct">${esc(k.title)}${imp}${BASIS[k.basis] ? `<span class="basis basis-${k.basis}" title="${BASIS[k.basis][1]}">${BASIS[k.basis][0]}</span>` : ''}${catName ? ` <span class="small muted">· ${esc(catName)}</span>` : ''}</div>
         <div class="cd">${esc(k.detail)}</div>
         ${k.fix ? `<div class="cf"><b>建議：</b>${esc(k.fix)}</div>` : ''}
+        ${k.src && k.src.length ? `<div class="src">📎 來源：${k.src.map(u => { let h = u; try { h = new URL(u).hostname.replace(/^(www|developers|support|docs)\./, ''); } catch (e) { } return `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(h)}</a>`; }).join('、')}</div>` : ''}
       </div>
       <span class="pts">${k.max ? `${k.score}/${k.max}` : '—'}</span>
     </div>`;

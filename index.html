@@ -25,7 +25,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@500;600&display=swap">
-  <link rel="stylesheet" href="css/style.css?v=4">
+  <link rel="stylesheet" href="css/style.css?v=5">
   <script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',JSON.parse(t))}catch(e){}</script>
 
   <script type="application/ld+json">
@@ -52,7 +52,7 @@
           {
             "@type": "Question",
             "name": "SEO 與 GEO 有什麼不同？",
-            "acceptedAnswer": { "@type": "Answer", "text": "SEO 的目標是在搜尋結果頁取得好排名並獲得點擊；GEO 的目標是成為 AI 回答中被引用的來源。兩者基礎相同（可抓取、結構清楚、內容可信），但 GEO 更重視答案先行的段落、具體數據、問答結構、品牌實體與 AI 爬蟲存取權限。" }
+            "acceptedAnswer": { "@type": "Answer", "text": "SEO 讓網站在搜尋結果中被找到；GEO 讓內容在 AI 回答中被引用、被推薦。Google 2026 年的官方指南表示，為 AI 搜尋做優化本質上仍是 SEO：能被抓取與索引、內容有用且有獨特觀點，不需要 llms.txt 或特殊標記。其他 AI 引擎（ChatGPT、Perplexity、Claude）則要確認它們的搜尋爬蟲沒有被 robots.txt 擋掉。" }
           },
           {
             "@type": "Question",
@@ -67,7 +67,7 @@
           {
             "@type": "Question",
             "name": "FAQPage Schema 現在還有用嗎？",
-            "acceptedAnswer": { "@type": "Answer", "text": "自 2023 年起 Google 只對政府與醫療等權威網站顯示 FAQ 複合式結果，但 FAQPage 結構化資料仍能幫助 AI 搜尋引擎理解問答關係，對 GEO 仍有正面效果，且頁面上的問答內容本身就是 AI 最常引用的格式。" }
+            "acceptedAnswer": { "@type": "Answer", "text": "Google 已於 2026 年 5 月 7 日全面停止顯示 FAQ 複合式結果（2023 年起原本只剩政府與醫療網站）。FAQPage 標記仍是有效的 Schema.org 詞彙，保留不會出錯，但不會再帶來搜尋特效；頁面上清楚的問答內容本身對讀者仍有幫助。" }
           }
         ]
       }
@@ -281,7 +281,7 @@
           <article class="feature spot reveal" style="--d:.06s"><div class="fi">🏷️</div><h3>TDK 標題與描述</h3><p>Title、Meta Description、Keywords 的存在、長度（以中文寬度計算）、重複與關鍵字佈局。</p></article>
           <article class="feature spot reveal" style="--d:.12s"><div class="fi">🔠</div><h3>H 標籤結構</h3><p>H1 唯一性、H2 段落、階層跳級、空白標題，並畫出完整標題樹。</p></article>
           <article class="feature spot reveal"><div class="fi">🧩</div><h3>Schema 結構化資料</h3><p>解析 JSON-LD、驗證語法與必要欄位，檢查 Organization、WebSite、Breadcrumb 等。</p></article>
-          <article class="feature spot hl reveal" style="--d:.06s"><span class="tagx">一鍵產生</span><div class="fi">❓</div><h3>FAQPage</h3><p>驗證 FAQ Schema 結構與可見性，並從頁面自動擷取問答、一鍵產生 JSON-LD 與 HTML。</p></article>
+          <article class="feature spot hl reveal" style="--d:.06s"><span class="tagx">一鍵產生</span><div class="fi">❓</div><h3>FAQ 問答</h3><p>從頁面自動擷取問答、驗證 FAQPage 標記，一鍵產生 JSON-LD 與 HTML（依 2026 年 Google 新規，沒有標記不扣分）。</p></article>
           <article class="feature spot reveal" style="--d:.12s"><div class="fi">⚙️</div><h3>技術 SEO</h3><p>HTTPS、Canonical、noindex、viewport、lang、robots.txt、sitemap.xml、語意標籤。</p></article>
           <article class="feature spot reveal"><div class="fi">📝</div><h3>內容品質</h3><p>字數、文字比例、段落、清單表格、句長可讀性、關鍵字密度與熱門詞。</p></article>
           <article class="feature spot reveal" style="--d:.06s"><div class="fi">🖼️</div><h3>圖片與連結</h3><p>ALT、寬高、lazy、WebP/AVIF；內外連結、錨點文字、noopener。</p></article>
@@ -296,23 +296,23 @@
         <h2 class="reveal">透明的評分方式</h2>
         <p class="sub reveal">每項檢查依「通過＝滿分、警告＝半分、未通過＝0 分」計算，資訊類不計分；類別分數再依權重加權成總分。</p>
         <div class="weights reveal">
-          <div><span class="wl">🤖 GEO / AI 搜尋可見度 <b>18%</b></span><span class="wbar"><i style="width:100%"></i></span></div>
-          <div><span class="wl">🏷️ TDK 標題與描述 <b>15%</b></span><span class="wbar"><i style="width:83%"></i></span></div>
-          <div><span class="wl">🧩 結構化資料 Schema <b>13%</b></span><span class="wbar"><i style="width:72%"></i></span></div>
-          <div><span class="wl">🔠 H 標籤結構 <b>12%</b></span><span class="wbar"><i style="width:67%"></i></span></div>
-          <div><span class="wl">📝 內容品質 <b>12%</b></span><span class="wbar"><i style="width:67%"></i></span></div>
-          <div><span class="wl">⚙️ 技術 SEO <b>12%</b></span><span class="wbar"><i style="width:67%"></i></span></div>
-          <div><span class="wl">❓ FAQPage 常見問答 <b>8%</b></span><span class="wbar"><i style="width:44%"></i></span></div>
-          <div><span class="wl">🖼️ 圖片優化 <b>8%</b></span><span class="wbar"><i style="width:44%"></i></span></div>
-          <div><span class="wl">🔗 連結結構 <b>7%</b></span><span class="wbar"><i style="width:39%"></i></span></div>
-          <div><span class="wl">📣 社群分享 OG <b>5%</b></span><span class="wbar"><i style="width:28%"></i></span></div>
-          <div><span class="wl">⚡ 效能指標 <b>5%</b></span><span class="wbar"><i style="width:28%"></i></span></div>
+          <div><span class="wl">🤖 GEO / AI 搜尋可見度 <b>16%</b></span><span class="wbar"><i style="width:100%"></i></span></div>
+          <div><span class="wl">🏷️ TDK 標題與描述 <b>13%</b></span><span class="wbar"><i style="width:81%"></i></span></div>
+          <div><span class="wl">⚙️ 技術 SEO <b>13%</b></span><span class="wbar"><i style="width:81%"></i></span></div>
+          <div><span class="wl">🧩 結構化資料 Schema <b>11%</b></span><span class="wbar"><i style="width:69%"></i></span></div>
+          <div><span class="wl">🔠 H 標籤結構 <b>10%</b></span><span class="wbar"><i style="width:62%"></i></span></div>
+          <div><span class="wl">📝 內容品質 <b>10%</b></span><span class="wbar"><i style="width:62%"></i></span></div>
+          <div><span class="wl">🖼️ 圖片優化 <b>7%</b></span><span class="wbar"><i style="width:44%"></i></span></div>
+          <div><span class="wl">🔗 連結結構 <b>6%</b></span><span class="wbar"><i style="width:38%"></i></span></div>
+          <div><span class="wl">📣 社群分享 OG <b>5%</b></span><span class="wbar"><i style="width:31%"></i></span></div>
+          <div><span class="wl">⚡ 效能指標 <b>5%</b></span><span class="wbar"><i style="width:31%"></i></span></div>
+          <div><span class="wl">❓ FAQ 問答內容 <b>4%</b></span><span class="wbar"><i style="width:25%"></i></span></div>
         </div>
         <div class="grades reveal">
           <span class="bg-good">A+ ≥ 90</span><span class="bg-good">A ≥ 80</span><span class="bg-info">B ≥ 70</span>
           <span class="bg-warn">C ≥ 60</span><span class="bg-warn">D ≥ 50</span><span class="bg-bad">F &lt; 50</span>
         </div>
-        <p class="sub reveal" style="margin-top:22px;margin-bottom:0">每一項檢查都標示依據來源：<span class="basis basis-g">官方規範</span>、<span class="basis basis-p">最佳實務</span>、<span class="basis basis-h">經驗值</span>。Google 已表示不採用的項目（meta keywords、llms.txt、文字比例）只列為資訊，不計分。</p>
+        <p class="sub reveal" style="margin-top:22px;margin-bottom:0">每一項檢查都標示依據來源：<span class="basis basis-g">官方規範</span>、<span class="basis basis-p">最佳實務</span>、<span class="basis basis-h">經驗值</span>。Google 已表示不採用或不需要的項目（meta keywords、llms.txt、文字比例、FAQPage 標記）只列為資訊，不計分。每項檢查也附上官方來源連結。</p>
       </div>
     </section>
 
@@ -328,7 +328,7 @@
           </details>
           <details>
             <summary>SEO 與 GEO 有什麼不同？</summary>
-            <p>SEO 的目標是在搜尋結果頁取得好排名並獲得點擊；GEO 的目標是成為 AI 回答中被引用的來源。兩者基礎相同（可抓取、結構清楚、內容可信），但 GEO 更重視答案先行的段落、具體數據、問答結構、品牌實體與 AI 爬蟲存取權限。</p>
+            <p>SEO 讓網站在搜尋結果中被找到；GEO 讓內容在 AI 回答中被引用、被推薦。Google 2026 年的官方指南表示，為 AI 搜尋做優化本質上仍是 SEO：能被抓取與索引、內容有用且有獨特觀點，不需要 llms.txt 或特殊標記。其他 AI 引擎（ChatGPT、Perplexity、Claude）則要確認它們的搜尋爬蟲沒有被 robots.txt 擋掉。</p>
           </details>
           <details>
             <summary>為什麼有些網址無法檢測？</summary>
@@ -340,7 +340,7 @@
           </details>
           <details>
             <summary>FAQPage Schema 現在還有用嗎？</summary>
-            <p>自 2023 年起 Google 只對政府與醫療等權威網站顯示 FAQ 複合式結果，但 FAQPage 結構化資料仍能幫助 AI 搜尋引擎理解問答關係，對 GEO 仍有正面效果，且頁面上的問答內容本身就是 AI 最常引用的格式。</p>
+            <p>Google 已於 2026 年 5 月 7 日全面停止顯示 FAQ 複合式結果（2023 年起原本只剩政府與醫療網站）。FAQPage 標記仍是有效的 Schema.org 詞彙，保留不會出錯，但不會再帶來搜尋特效；頁面上清楚的問答內容本身對讀者仍有幫助。</p>
           </details>
         </div>
 
@@ -351,19 +351,38 @@
         </div>
       </div>
     </section>
+    <!-- ================= 參考資料 ================= -->
+    <section class="section" id="sources" style="padding-top:10px">
+      <div class="container">
+        <span class="kicker reveal">Sources</span>
+        <h2 class="reveal">評分依據與參考資料</h2>
+        <p class="sub reveal">檢查規則已對照下列官方文件與研究更新，最後查證日期：<b>2026-10-08</b>。</p>
+        <div class="refs reveal">
+          <a href="https://developers.google.com/search/docs/fundamentals/ai-optimization-guide" target="_blank" rel="noopener">Google：為生成式 AI 搜尋優化網站<small>2026-05 發布、2026-07 更新｜AEO/GEO 仍是 SEO、不需 llms.txt 與切塊</small></a>
+          <a href="https://developers.google.com/search/docs/appearance/ai-features" target="_blank" rel="noopener">Google：AI 功能與你的網站<small>AI Overviews / AI Mode 資格與控制方式</small></a>
+          <a href="https://developers.google.com/search/updates" target="_blank" rel="noopener">Google Search 文件更新紀錄<small>2026-05-07 起停止顯示 FAQ 複合式結果</small></a>
+          <a href="https://developers.google.com/crawling/docs/crawlers-fetchers/google-common-crawlers" target="_blank" rel="noopener">Google：常見爬蟲與 Google-Extended<small>Google-Extended 不影響 Google 搜尋</small></a>
+          <a href="https://developers.openai.com/api/docs/bots" target="_blank" rel="noopener">OpenAI 爬蟲說明<small>OAI-SearchBot、GPTBot、ChatGPT-User、OAI-AdsBot</small></a>
+          <a href="https://support.claude.com/en/articles/8896518-what-is-claudebot" target="_blank" rel="noopener">Anthropic 爬蟲說明<small>ClaudeBot、Claude-SearchBot、Claude-User（2026-04 更新）</small></a>
+          <a href="https://docs.perplexity.ai/guides/bots" target="_blank" rel="noopener">Perplexity 爬蟲說明<small>PerplexityBot、Perplexity-User</small></a>
+          <a href="https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data" target="_blank" rel="noopener">Google：結構化資料介紹<small>JSON-LD、Schema.org 與複合式結果</small></a>
+          <a href="https://arxiv.org/abs/2311.09735" target="_blank" rel="noopener">GEO: Generative Engine Optimization<small>Aggarwal 等，KDD 2024｜數據與引用來源提升能見度</small></a>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer class="site-footer">
     <div class="container">
-      SEO / GEO 網站健檢工具 · 純前端分析，資料不會上傳到我們的伺服器 · 檢測結果僅供參考，實際排名與 AI 引用受多種因素影響
+      SEO / GEO 網站健檢工具 · 評分依據查證至 2026-10-08 · 分析在你的瀏覽器中完成，只有按「分享」才會上傳結果 · 檢測結果僅供參考，實際排名與 AI 引用受多種因素影響
     </div>
   </footer>
 
   <div class="toast" id="toast" role="status"></div>
 
-  <script src="js/audit.js?v=3" defer></script>
+  <script src="js/audit.js?v=6" defer></script>
   <script src="js/demo.js?v=3" defer></script>
-  <script src="js/app.js?v=4" defer></script>
+  <script src="js/app.js?v=5" defer></script>
 
   <!-- Supabase：公開檢測紀錄（讀取 + 新增）。只使用可公開的 Publishable key，權限由資料庫 RLS 控管 -->
   <script type="module">

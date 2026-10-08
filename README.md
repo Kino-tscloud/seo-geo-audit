@@ -2,6 +2,8 @@
 
 純靜態網站（HTML / CSS / JS），網址：https://kino-tscloud.github.io/seo-geo-audit/
 
+評分規則已對照 Google Search Central（含 2026-05 生成式 AI 優化指南、2026-05 FAQ 複合式結果停用）與 OpenAI / Anthropic / Perplexity 官方爬蟲文件，最後查證：2026-10-08。舊版保存在 tag `v1.0`。
+
 ## 檔案結構
 ```
 index.html        首頁（工具本體）

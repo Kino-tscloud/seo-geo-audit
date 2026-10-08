@@ -124,15 +124,15 @@
 
   const AI_BOTS = [
     { ua: 'OAI-SearchBot', owner: 'OpenAI', use: 'ChatGPT 搜尋', kind: 'search' },
-    { ua: 'ChatGPT-User', owner: 'OpenAI', use: 'ChatGPT 即時瀏覽', kind: 'search' },
+    { ua: 'ChatGPT-User', owner: 'OpenAI', use: '使用者觸發瀏覽（官方：robots.txt 可能不適用）', kind: 'user' },
     { ua: 'GPTBot', owner: 'OpenAI', use: '模型訓練', kind: 'train' },
     { ua: 'Claude-SearchBot', owner: 'Anthropic', use: 'Claude 搜尋', kind: 'search' },
-    { ua: 'Claude-User', owner: 'Anthropic', use: 'Claude 即時瀏覽', kind: 'search' },
+    { ua: 'Claude-User', owner: 'Anthropic', use: '使用者觸發瀏覽', kind: 'user' },
     { ua: 'ClaudeBot', owner: 'Anthropic', use: '模型訓練', kind: 'train' },
     { ua: 'PerplexityBot', owner: 'Perplexity', use: 'Perplexity 搜尋', kind: 'search' },
-    { ua: 'Perplexity-User', owner: 'Perplexity', use: '即時瀏覽', kind: 'search' },
+    { ua: 'Perplexity-User', owner: 'Perplexity', use: '使用者觸發（官方：通常不遵守 robots.txt）', kind: 'user' },
     { ua: 'Googlebot', owner: 'Google', use: '搜尋 + AI Overviews', kind: 'search' },
-    { ua: 'Google-Extended', owner: 'Google', use: 'Gemini 訓練/接地', kind: 'train' },
+    { ua: 'Google-Extended', owner: 'Google', use: 'Gemini 訓練與接地（不影響 Google 搜尋）', kind: 'train' },
     { ua: 'Bingbot', owner: 'Microsoft', use: 'Bing + Copilot', kind: 'search' },
     { ua: 'Applebot-Extended', owner: 'Apple', use: 'Apple Intelligence', kind: 'train' },
     { ua: 'CCBot', owner: 'Common Crawl', use: '開放資料集', kind: 'train' },
@@ -446,10 +446,39 @@
       og: 'p', 'og-img': 'p', twitter: 'p', 'site-name': 'g',
       'ai-bots': 'g', 'ai-train': 'g', nosnippet: 'g', llms: 'h', ssr: 'p', 'q-heading': 'h', citable: 'h', stats: 'h', 'cite-src': 'p',
       author: 'p', fresh: 'p', entity: 'p', define: 'h', struct: 'p',
-      'html-size': 'h', blocking: 'g', requests: 'h', inline: 'h', hints: 'p', ttfb: 'h'
+      'gsc-ai': 'g', 'html-size': 'h', blocking: 'g', requests: 'h', inline: 'h', hints: 'p', ttfb: 'h'
+    };
+    const GEN_AI = 'https://developers.google.com/search/docs/fundamentals/ai-optimization-guide';
+    const SD = 'https://developers.google.com/search/docs/appearance/structured-data/';
+    const SOURCES = {
+      title: 'https://developers.google.com/search/docs/appearance/title-link', 'title-len': 'https://developers.google.com/search/docs/appearance/title-link',
+      desc: 'https://developers.google.com/search/docs/appearance/snippet', 'desc-len': 'https://developers.google.com/search/docs/appearance/snippet',
+      keywords: 'https://developers.google.com/search/blog/2009/09/google-does-not-use-keywords-meta-tag',
+      ld: SD + 'intro-structured-data', 'ld-valid': SD + 'intro-structured-data', 'ld-ctx': SD + 'intro-structured-data', 'ld-fields': SD + 'search-gallery',
+      org: SD + 'organization', entity: SD + 'organization', website: 'https://developers.google.com/search/docs/appearance/site-names', 'site-name': 'https://developers.google.com/search/docs/appearance/site-names',
+      breadcrumb: SD + 'breadcrumb', 'faq-visible': SD + 'sd-policies',
+      'faq-schema': 'https://developers.google.com/search/updates', 'faq-note': 'https://developers.google.com/search/updates',
+      words: GEN_AI + '#mythbusting', citable: GEN_AI + '#mythbusting', llms: GEN_AI + '#mythbusting', 'gsc-ai': GEN_AI,
+      'kw-density': 'https://developers.google.com/search/docs/essentials/spam-policies',
+      alt: 'https://developers.google.com/search/docs/appearance/google-images', format: 'https://developers.google.com/search/docs/appearance/google-images',
+      dim: 'https://web.dev/articles/optimize-cls', lazy: 'https://web.dev/articles/browser-level-image-lazy-loading',
+      internal: 'https://developers.google.com/search/docs/crawling-indexing/links-crawlable', anchor: 'https://developers.google.com/search/docs/crawling-indexing/links-crawlable', jslink: 'https://developers.google.com/search/docs/crawling-indexing/links-crawlable',
+      https: 'https://developers.google.com/search/docs/appearance/page-experience', noindex: 'https://developers.google.com/search/docs/crawling-indexing/block-indexing',
+      canonical: 'https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls',
+      viewport: 'https://developers.google.com/search/docs/crawling-indexing/mobile/mobile-sites-mobile-first-indexing',
+      favicon: 'https://developers.google.com/search/docs/appearance/favicon-in-search', hreflang: 'https://developers.google.com/search/docs/specialty/international/localized-versions',
+      url: 'https://developers.google.com/search/docs/crawling-indexing/url-structure', robots: 'https://developers.google.com/search/docs/crawling-indexing/robots/intro',
+      'robots-sm': 'https://developers.google.com/search/docs/crawling-indexing/robots/intro', sitemap: 'https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview',
+      og: 'https://ogp.me/', nosnippet: 'https://developers.google.com/search/docs/appearance/ai-features',
+      ssr: 'https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics',
+      stats: 'https://arxiv.org/abs/2311.09735', 'cite-src': 'https://arxiv.org/abs/2311.09735',
+      author: 'https://developers.google.com/search/docs/fundamentals/creating-helpful-content', fresh: 'https://developers.google.com/search/docs/fundamentals/creating-helpful-content',
+      'ai-bots': ['https://developers.openai.com/api/docs/bots', 'https://support.claude.com/en/articles/8896518-what-is-claudebot', 'https://docs.perplexity.ai/guides/bots'],
+      'ai-train': ['https://developers.google.com/crawling/docs/crawlers-fetchers/google-common-crawlers', 'https://developers.openai.com/api/docs/bots']
     };
     function add(c, o) {
       o.basis = BASIS[o.id] || 'p';
+      if (SOURCES[o.id]) o.src = [].concat(SOURCES[o.id]);
       const max = o.status === 'info' ? 0 : (o.max == null ? 5 : o.max);
       let score = o.score;
       if (score == null) score = o.status === 'pass' ? max : o.status === 'warn' ? Math.round(max * 0.5) : 0;
@@ -459,7 +488,7 @@
     const kwIn = s => kw && s.toLowerCase().includes(kw);
 
     /* ---- 1. TDK ---- */
-    const cT = cat('tdk', 'TDK 標題與描述', '🏷️', 15, 'seo', 'Title / Description / Keywords');
+    const cT = cat('tdk', 'TDK 標題與描述', '🏷️', 13, 'seo', 'Title / Description / Keywords');
     const tU = units(title);
     if (!title) add(cT, { id: 'title', title: '頁面標題 <title>', status: 'fail', max: 10, impact: 'high', detail: '找不到 <title> 標籤。', fix: '在 <head> 加入獨一無二、含核心關鍵字的 <title>，建議 15–30 個中文字（約 30–60 字元）。' });
     else {
@@ -496,7 +525,7 @@
     if (title && desc && title === desc) add(cT, { id: 'td-same', title: '標題與描述重複', status: 'warn', max: 3, detail: 'Title 與 Description 內容完全相同。', fix: '描述應補充標題沒說到的價值資訊。' });
 
     /* ---- 2. Headings ---- */
-    const cH = cat('headings', 'H 標籤結構', '🔠', 12, 'seo', 'H1–H6 階層與語意');
+    const cH = cat('headings', 'H 標籤結構', '🔠', 10, 'seo', 'H1–H6 階層與語意');
     if (h1s.length === 1) add(cH, { id: 'h1', title: 'H1 數量', status: 'pass', max: 8, detail: `1 個 H1：「${h1s[0].text}」` });
     else if (h1s.length === 0) add(cH, { id: 'h1', title: 'H1 數量', status: 'fail', max: 8, impact: 'high', detail: '頁面沒有 H1。', fix: '每頁加入一個描述頁面主題的 <h1>，通常與 <title> 相近但可更口語。' });
     else add(cH, { id: 'h1', title: 'H1 數量', status: 'warn', max: 8, score: 6, impact: 'low', detail: `發現 ${h1s.length} 個 H1：${h1s.slice(0, 4).map(h => '「' + truncUnits(h.text, 40) + '」').join('、')}`, fix: 'Google 表示多個 H1 不影響排名；但單一 H1 讓頁面主題與無障礙閱讀更清楚，建議主標題用 H1、其餘改為 H2。' });
@@ -515,9 +544,9 @@
     }
 
     /* ---- 3. Schema ---- */
-    const cS = cat('schema', '結構化資料 Schema', '🧩', 13, 'both', 'JSON-LD / Schema.org');
+    const cS = cat('schema', '結構化資料 Schema', '🧩', 11, 'both', 'JSON-LD / Schema.org');
     if (!ldBlocks.length) {
-      add(cS, { id: 'ld', title: 'JSON-LD 結構化資料', status: 'fail', max: 10, impact: 'high', detail: microdata.length ? `沒有 JSON-LD，但有 Microdata：${[...new Set(microdata)].join('、')}` : '頁面沒有任何 JSON-LD 結構化資料。', fix: '加入 JSON-LD（Google 建議格式）。至少包含 Organization + WebSite，並依頁面類型加入 Article / Product / LocalBusiness / FAQPage / BreadcrumbList。可到「程式碼產生器」分頁直接複製。' });
+      add(cS, { id: 'ld', title: 'JSON-LD 結構化資料', status: 'warn', max: 10, impact: 'medium', detail: microdata.length ? `沒有 JSON-LD，但有 Microdata：${[...new Set(microdata)].join('、')}` : '頁面沒有任何 JSON-LD 結構化資料。', fix: 'Google 表示 AI 搜尋不需要結構化資料，但它仍是取得複合式搜尋結果、讓搜尋引擎理解頁面的方式。建議加入 JSON-LD（Google 建議格式）。至少包含 Organization + WebSite，並依頁面類型加入 Article / Product / LocalBusiness / FAQPage / BreadcrumbList。可到「程式碼產生器」分頁直接複製。' });
     } else {
       add(cS, { id: 'ld', title: 'JSON-LD 結構化資料', status: 'pass', max: 10, detail: `${ldBlocks.length} 段 JSON-LD，類型：${schemaTypes.join('、') || '（無 @type）'}` });
       add(cS, { id: 'ld-valid', title: 'JSON 語法正確', status: schemaErrors.length ? 'fail' : 'pass', max: 5, impact: 'high', detail: schemaErrors.length ? schemaErrors.join('；') : '所有 JSON-LD 均可正確解析。', fix: schemaErrors.length ? '修正 JSON 語法錯誤（常見：多餘逗號、未跳脫的雙引號、註解）。可用 validator.schema.org 驗證。' : '' });
@@ -529,7 +558,7 @@
     add(cS, { id: 'website', title: 'WebSite Schema', status: hasSite ? 'pass' : 'warn', max: 3, impact: 'low', detail: hasSite ? '已宣告 WebSite。' : '未宣告 WebSite。', fix: hasSite ? '' : '加入 WebSite Schema（name、url），可協助 Google 顯示網站名稱。' });
     const hasBc = schemaItems.some(o => hasType(o, ['BreadcrumbList']));
     const isHome = urlObj ? (urlObj.pathname === '/' || urlObj.pathname === '') : false;
-    add(cS, { id: 'breadcrumb', title: 'BreadcrumbList 麵包屑', status: hasBc ? 'pass' : isHome ? 'info' : 'warn', max: 3, impact: 'low', detail: hasBc ? '已宣告麵包屑。' : isHome ? '首頁可不需要麵包屑。' : '內頁未宣告麵包屑。', fix: hasBc ? '' : '內頁加入 BreadcrumbList，搜尋結果會顯示路徑，提升點擊率。' });
+    add(cS, { id: 'breadcrumb', title: 'BreadcrumbList 麵包屑', status: hasBc ? 'pass' : isHome ? 'info' : 'warn', max: 3, impact: 'low', detail: hasBc ? '已宣告麵包屑。' : isHome ? '首頁可不需要麵包屑。' : '內頁未宣告麵包屑。', fix: hasBc ? '' : '內頁加入 BreadcrumbList。Google 自 2025 年起只在「桌機版」搜尋結果顯示麵包屑路徑。' });
     // 欄位驗證
     const fieldIssues = [];
     schemaItems.forEach(o => {
@@ -552,25 +581,25 @@
     }
 
     /* ---- 4. FAQPage ---- */
-    const cF = cat('faq', 'FAQPage 常見問答', '❓', 8, 'geo', 'FAQ Schema 與問答內容');
+    const cF = cat('faq', 'FAQ 問答內容', '❓', 4, 'geo', '問答內容與 FAQPage 標記');
     if (faqSchemas.length) {
       const n = schemaFaqs.length;
-      add(cF, { id: 'faq-schema', title: 'FAQPage Schema', status: 'pass', max: 8, detail: `已宣告 FAQPage，共 ${n} 題有效問答。` });
+      add(cF, { id: 'faq-schema', title: 'FAQPage Schema', status: 'pass', max: 3, detail: `已宣告 FAQPage，共 ${n} 題有效問答。Google 已於 2026-05-07 停止顯示 FAQ 複合式結果，但標記仍是有效的 Schema.org 詞彙，可以保留。` });
       add(cF, { id: 'faq-valid', title: 'FAQ 結構完整', status: faqIssues.length ? 'fail' : 'pass', max: 6, impact: 'high', detail: faqIssues.length ? faqIssues.slice(0, 5).join('；') : '每題都有 Question.name 與 acceptedAnswer.text。', fix: faqIssues.length ? '每個 Question 需有 name，並有 acceptedAnswer（@type: Answer）含 text。' : '' });
       add(cF, { id: 'faq-count', title: '問答數量', status: n >= 3 ? 'pass' : 'warn', max: 3, impact: 'low', detail: `${n} 題，建議 3–10 題。`, fix: n >= 3 ? '' : '增加到至少 3 題真實使用者會問的問題。' });
       add(cF, { id: 'faq-visible', title: 'FAQ 內容在頁面上可見', status: faqVisible.length >= n * 0.8 ? 'pass' : 'warn', max: 4, impact: 'medium', detail: `${faqVisible.length}/${n} 題的問題文字可在頁面本文中找到。`, fix: faqVisible.length >= n * 0.8 ? '' : 'Google 規範：結構化資料內容必須與頁面可見內容一致，請將問答實際顯示在頁面上。' });
       const shortA = schemaFaqs.filter(f => wordCount(f.a) < 20).length;
-      add(cF, { id: 'faq-depth', title: '答案完整度', status: shortA ? 'warn' : 'pass', max: 3, impact: 'medium', detail: shortA ? `${shortA} 題答案少於 20 字。` : '答案長度充足。', fix: shortA ? '答案建議 40–150 字，第一句直接回答問題，AI 引擎最常擷取這類「直接答案」。' : '' });
+      add(cF, { id: 'faq-depth', title: '答案完整度', status: shortA ? 'warn' : 'pass', max: 3, impact: 'medium', detail: shortA ? `${shortA} 題答案少於 20 字。` : '答案長度充足。', fix: shortA ? '答案太短可能無法真正解決問題；建議第一句直接回答，再補充必要說明。' : '' });
     } else {
       const visQ = detectedFaqs.length;
-      add(cF, { id: 'faq-schema', title: 'FAQPage Schema', status: 'warn', max: 6, impact: 'medium', detail: visQ ? `頁面上偵測到 ${visQ} 組疑似問答內容，但沒有 FAQPage Schema。` : '沒有 FAQPage Schema，也未偵測到問答區塊。', fix: visQ ? '已自動擷取問答，到「程式碼產生器 → FAQPage」一鍵產生 JSON-LD。' : '新增「常見問題」區塊（3–8 題），並以 FAQPage Schema 標記。' });
-      add(cF, { id: 'faq-content', title: '頁面問答內容', status: visQ >= 3 ? 'pass' : visQ ? 'warn' : 'fail', max: 5, impact: 'medium', detail: visQ ? `偵測到 ${visQ} 組：${detectedFaqs.slice(0, 3).map(f => '「' + truncUnits(f.q, 36) + '」').join('、')}` : '無。', fix: visQ >= 3 ? '' : '以使用者真實提問為標題（H2/H3 或 <details>），下方第一句直接給答案。' });
+      add(cF, { id: 'faq-schema', title: 'FAQPage Schema（選用）', status: 'info', detail: (visQ ? `頁面上有 ${visQ} 組問答，但沒有 FAQPage 標記。` : '沒有 FAQPage 標記。') + 'Google 已於 2026-05-07 全面停止顯示 FAQ 複合式結果，且表示 AI 搜尋不需要特殊標記，因此不扣分。想加的話可用「程式碼產生器」。' });
+      add(cF, { id: 'faq-content', title: '頁面問答內容', status: visQ >= 3 ? 'pass' : visQ ? 'warn' : 'fail', max: 5, impact: 'medium', detail: visQ ? `偵測到 ${visQ} 組：${detectedFaqs.slice(0, 3).map(f => '「' + truncUnits(f.q, 36) + '」').join('、')}` : '無。', fix: visQ >= 3 ? '' : '整理讀者真正會問的問題並在頁面上回答（例如常見問題區塊）。這是幫助讀者的內容，不是為了搜尋特效。' });
     }
-    add(cF, { id: 'faq-note', title: 'FAQ 複合式結果說明', status: 'info', detail: '自 2023 年起 Google 僅對政府與醫療權威網站顯示 FAQ 複合式結果，但 FAQPage 仍能幫助 ChatGPT、Perplexity、AI Overviews 理解並引用問答內容。' });
+    add(cF, { id: 'faq-note', title: 'FAQ 複合式結果現況', status: 'info', detail: 'Google 於 2023 年先限縮 FAQ 複合式結果，2026-05-07 起全面停止顯示（含政府與醫療網站），2026-06 移除相關文件。FAQPage 標記仍有效、不會報錯；頁面上的問答內容本身對讀者仍有價值。' });
 
     /* ---- 5. Content ---- */
-    const cC = cat('content', '內容品質', '📝', 12, 'both', '字數、可讀性與關鍵字');
-    add(cC, { id: 'words', title: '內容字數', status: words >= 600 ? 'pass' : words >= 250 ? 'warn' : 'fail', max: 8, impact: 'high', detail: `約 ${words.toLocaleString()} 字（中文以字計、英文以詞計）。`, fix: words >= 600 ? '' : '內容偏少（Thin Content）。建議主要頁面至少 600–1,500 字，完整回答使用者問題。' });
+    const cC = cat('content', '內容品質', '📝', 10, 'both', '字數、可讀性與關鍵字');
+    add(cC, { id: 'words', title: '內容量', status: words >= 300 ? 'pass' : words >= 120 ? 'warn' : 'fail', max: 5, impact: words < 120 ? 'high' : 'medium', detail: `約 ${words.toLocaleString()} 字（中文以字計、英文以詞計）。Google 表示沒有「理想頁面長度」，此項只檢查內容是否過少。`, fix: words >= 300 ? '' : '內容可能不足以回答讀者的問題。重點是完整、有獨特觀點（例如第一手經驗），不是湊字數。' });
     add(cC, { id: 'ratio', title: '文字 / HTML 比例', status: 'info', detail: `${textRatio.toFixed(1)}%（HTML ${(htmlSize / 1024).toFixed(1)} KB）。Google 表示這不是排名因素，僅供參考。` });
     add(cC, { id: 'paras', title: '段落結構', status: paragraphs.length >= 5 ? 'pass' : paragraphs.length >= 2 ? 'warn' : 'fail', max: 3, impact: 'low', detail: `${paragraphs.length} 個 <p> 段落。`, fix: paragraphs.length >= 5 ? '' : '使用 <p> 分段，每段 2–4 句，提升閱讀與擷取性。' });
     const longParas = paragraphs.filter(p => wordCount(p) > 250).length;
@@ -588,7 +617,7 @@
     add(cC, { id: 'readability', title: '句子可讀性', status: avgSent <= 35 ? 'pass' : avgSent <= 55 ? 'warn' : 'fail', max: 3, impact: 'low', detail: `平均每句約 ${avgSent.toFixed(0)} 字。`, fix: avgSent <= 35 ? '' : '句子偏長，適度斷句，一句一個概念。' });
 
     /* ---- 6. Images ---- */
-    const cI = cat('images', '圖片優化', '🖼️', 8, 'seo', 'ALT、尺寸、格式、延遲載入');
+    const cI = cat('images', '圖片優化', '🖼️', 7, 'seo', 'ALT、尺寸、格式、延遲載入');
     if (!imgs.length) add(cI, { id: 'img-none', title: '頁面圖片', status: 'warn', max: 4, impact: 'low', detail: '頁面沒有 <img> 圖片。', fix: '適度加入具描述性 alt 的原創圖片，可增加圖片搜尋流量並提升內容豐富度。' });
     else {
       const altRate = (imgs.length - imgNoAlt.length) / imgs.length;
@@ -600,7 +629,7 @@
     }
 
     /* ---- 7. Links ---- */
-    const cL = cat('links', '連結結構', '🔗', 7, 'seo', '內外部連結與錨點文字');
+    const cL = cat('links', '連結結構', '🔗', 6, 'seo', '內外部連結與錨點文字');
     add(cL, { id: 'internal', title: '內部連結', status: internalLinks.length >= 5 ? 'pass' : internalLinks.length >= 1 ? 'warn' : 'fail', max: 5, impact: 'medium', detail: `${internalLinks.length} 個內部連結（${new Set(internalLinks.map(l => l.abs)).size} 個不重複）。`, fix: internalLinks.length >= 5 ? '' : '增加指向相關頁面的內部連結，協助爬蟲探索並傳遞權重。' });
     add(cL, { id: 'external', title: '外部連結', status: externalLinks.length ? 'pass' : 'warn', max: 3, impact: 'low', detail: `${externalLinks.length} 個外部連結，其中 ${nofollow.length} 個 nofollow/sponsored/ugc。`, fix: externalLinks.length ? '' : '適度引用權威外部來源，可提升內容可信度（E-E-A-T）。' });
     add(cL, { id: 'anchor', title: '錨點文字品質', status: emptyAnchor.length + genericAnchor.length === 0 ? 'pass' : (emptyAnchor.length + genericAnchor.length) <= 3 ? 'warn' : 'fail', max: 4, impact: 'medium', detail: `${emptyAnchor.length} 個無文字連結、${genericAnchor.length} 個泛用文字（如「點此」「更多」）。`, fix: emptyAnchor.length + genericAnchor.length ? '使用描述目的地的錨點文字；圖示連結請加 aria-label。' : '' });
@@ -608,7 +637,7 @@
     if (jsLinks.length) add(cL, { id: 'jslink', title: 'javascript: 連結', status: 'warn', max: 2, impact: 'low', detail: `${jsLinks.length} 個 href="javascript:…" 連結，爬蟲無法跟隨。`, fix: '改用真實網址或 <button>。' });
 
     /* ---- 8. Technical ---- */
-    const cX = cat('technical', '技術 SEO', '⚙️', 12, 'seo', '索引、Canonical、行動版與基礎設定');
+    const cX = cat('technical', '技術 SEO', '⚙️', 13, 'seo', '索引、Canonical、行動版與基礎設定');
     const https = urlObj ? urlObj.protocol === 'https:' : null;
     if (https !== null) add(cX, { id: 'https', title: 'HTTPS 加密', status: https ? 'pass' : 'fail', max: 6, impact: 'high', detail: https ? '使用 HTTPS。' : '未使用 HTTPS。', fix: https ? '' : '安裝 SSL 憑證並將 HTTP 301 轉址至 HTTPS（GitHub Pages / Cloudflare 皆可免費啟用）。' });
     const noindex = /noindex|none/.test(robotsMeta);
@@ -673,7 +702,7 @@
     add(cO, { id: 'site-name', title: 'og:site_name 品牌名稱', status: og['og:site_name'] ? 'pass' : 'warn', max: 1, impact: 'low', detail: og['og:site_name'] || '未設定。', fix: og['og:site_name'] ? '' : '加入 og:site_name 強化品牌識別。' });
 
     /* ---- 10. GEO ---- */
-    const cG = cat('geo', 'GEO / AI 搜尋可見度', '🤖', 18, 'geo', 'ChatGPT、Perplexity、Gemini、AI Overviews');
+    const cG = cat('geo', 'GEO / AI 搜尋可見度', '🤖', 16, 'geo', 'AI Overviews、AI Mode、ChatGPT、Perplexity、Copilot');
     // AI 爬蟲
     let botResults = null;
     if (robotsAux && robotsAux.state === 'ok') {
@@ -681,9 +710,10 @@
       const path = urlObj ? urlObj.pathname : '/';
       botResults = AI_BOTS.map(b => Object.assign({}, b, robotsBlocked(r, b.ua, path)));
       const blockedSearch = botResults.filter(b => b.blocked && b.kind === 'search');
+      const blockedUser = botResults.filter(b => b.blocked && b.kind === 'user');
       const blockedTrain = botResults.filter(b => b.blocked && b.kind === 'train');
-      add(cG, { id: 'ai-bots', title: 'AI 搜尋爬蟲存取', status: blockedSearch.length === 0 ? 'pass' : blockedSearch.length <= 2 ? 'warn' : 'fail', max: 10, impact: 'high', detail: blockedSearch.length ? `封鎖了 AI 搜尋爬蟲：${blockedSearch.map(b => b.ua).join('、')}` : 'AI 搜尋類爬蟲（OAI-SearchBot、PerplexityBot、Claude-SearchBot 等）皆可存取。', fix: blockedSearch.length ? '解除對 AI 搜尋爬蟲的封鎖，否則 ChatGPT / Perplexity / Claude 無法引用你的內容。' : '' });
-      add(cG, { id: 'ai-train', title: 'AI 訓練爬蟲政策', status: 'info', detail: blockedTrain.length ? `封鎖訓練用爬蟲：${blockedTrain.map(b => b.ua).join('、')}（屬商業決策，不影響 AI 搜尋引用）。` : '未封鎖訓練用爬蟲（GPTBot、ClaudeBot、Google-Extended 等）。' });
+      add(cG, { id: 'ai-bots', title: 'AI 搜尋爬蟲存取', status: blockedSearch.length === 0 ? 'pass' : blockedSearch.length <= 2 ? 'warn' : 'fail', max: 10, impact: 'high', detail: blockedSearch.length ? `封鎖了 AI 搜尋爬蟲：${blockedSearch.map(b => b.ua).join('、')}` : 'AI 搜尋類爬蟲（OAI-SearchBot、PerplexityBot、Claude-SearchBot 等）皆可存取。', fix: blockedSearch.length ? '解除對搜尋類爬蟲的封鎖，否則對應的搜尋或 AI 服務無法收錄、引用你的內容（Googlebot 同時影響 Google 搜尋與 AI Overviews）。' : '' });
+      add(cG, { id: 'ai-train', title: 'AI 訓練與使用者觸發爬蟲', status: 'info', detail: (blockedTrain.length ? `封鎖訓練用爬蟲：${blockedTrain.map(b => b.ua).join('、')}（屬商業決策；Google-Extended 官方說明不影響 Google 搜尋）。` : '未封鎖訓練用爬蟲（GPTBot、ClaudeBot、Google-Extended 等）。') + (blockedUser.length ? ` 另封鎖了使用者觸發的爬蟲：${blockedUser.map(b => b.ua).join('、')}；注意官方說明 ChatGPT-User、Perplexity-User 不一定遵守 robots.txt。` : '') });
     } else if (robotsAux && robotsAux.state === 'missing') {
       botResults = AI_BOTS.map(b => Object.assign({}, b, { blocked: false, specific: false }));
       add(cG, { id: 'ai-bots', title: 'AI 搜尋爬蟲存取', status: 'pass', max: 10, detail: '沒有 robots.txt，所有爬蟲預設可存取。' });
@@ -700,24 +730,26 @@
     if (ctx.rendered) add(cG, { id: 'ssr', title: '伺服器端可讀內容（非純 JS 渲染）', status: 'info', detail: '本次讀取的是瀏覽器渲染後的 DOM，無法判斷原始 HTML 是否含內容。請用「貼上原始碼」（Ctrl+U 的內容）確認。' });
     else add(cG, { id: 'ssr', title: '伺服器端可讀內容（非純 JS 渲染）', status: isCsrShell ? 'fail' : words >= 150 ? 'pass' : 'warn', max: 8, impact: 'high', detail: isCsrShell ? '原始 HTML 幾乎沒有文字，內容疑似由 JavaScript 在瀏覽器端產生（SPA）。多數 AI 爬蟲不執行 JS，將看不到內容。' : `原始 HTML 含約 ${words.toLocaleString()} 字可讀內容。`, fix: isCsrShell ? '改用 SSR / SSG（如 Next.js、Nuxt、Astro）或預先渲染，確保 HTML 原始碼即含完整內容。' : words < 150 ? '增加 HTML 中直接可讀的文字內容。' : '' });
     // 問句式標題
-    add(cG, { id: 'q-heading', title: '問題式標題', status: questionHeadings.length >= 3 ? 'pass' : questionHeadings.length >= 1 ? 'warn' : 'fail', max: 5, impact: 'medium', detail: `${questionHeadings.length} 個 H2–H6 為問句。${questionHeadings.slice(0, 3).map(h => '「' + truncUnits(h.text, 30) + '」').join('')}`, fix: questionHeadings.length >= 3 ? '' : '把子標題改寫成使用者真正會問的問題（例：「SEO 健檢多久做一次？」），與 AI 對話式查詢高度匹配。' });
+    add(cG, { id: 'q-heading', title: '問題式標題', status: questionHeadings.length >= 2 ? 'pass' : 'warn', max: 2, impact: 'medium', detail: `${questionHeadings.length} 個 H2–H6 為問句。${questionHeadings.slice(0, 3).map(h => '「' + truncUnits(h.text, 30) + '」').join('')}`, fix: questionHeadings.length >= 2 ? '' : '（經驗值，非 Google 要求）適合的話，用讀者真正會問的問題當子標題，讓內容更直接回應需求。Google 表示不需要為 AI 改寫各種問法。' });
     // 直接答案段落
-    add(cG, { id: 'citable', title: '可被引用的答案段落', status: citable.length >= 3 ? 'pass' : citable.length >= 1 ? 'warn' : 'fail', max: 8, impact: 'high', detail: `${citable.length} 個標題下方緊接 40–220 字的完整段落（AI 最容易擷取的長度）。`, fix: citable.length >= 3 ? '' : '採用「答案先行」寫法：每個 H2/H3 後的第一段用 2–4 句直接回答，可獨立閱讀、不依賴上下文。' });
+    add(cG, { id: 'citable', title: '重點先行的段落', status: citable.length >= 2 ? 'pass' : 'warn', max: 3, impact: 'low', detail: `${citable.length} 個標題下方緊接一段完整說明。`, fix: citable.length >= 2 ? '' : '（經驗值）每個段落開頭先講重點，讀者與各家 AI 摘要都更容易理解。Google 明確表示不需要為 AI 把內容「切塊」。' });
     // 統計數據
     const statN = statMatches.length;
-    add(cG, { id: 'stats', title: '具體數據與統計', status: statN >= 5 ? 'pass' : statN >= 2 ? 'warn' : 'fail', max: 5, impact: 'medium', detail: `偵測到 ${statN} 個量化數據${statN ? '，例：' + statMatches.slice(0, 4).join('、') : ''}。`, fix: statN >= 5 ? '' : 'GEO 學術研究（Aggarwal 等，KDD 2024）發現加入統計數據、引用來源能提高內容在生成式引擎中的能見度；請補充有出處的具體數據。' });
+    add(cG, { id: 'stats', title: '具體數據與統計', status: statN >= 3 ? 'pass' : 'warn', max: 3, impact: 'medium', detail: `偵測到 ${statN} 個量化數據${statN ? '，例：' + statMatches.slice(0, 4).join('、') : ''}。`, fix: statN >= 3 ? '' : 'GEO 學術研究（Aggarwal 等，KDD 2024）發現加入統計數據、引用來源能提高內容在生成式引擎中的能見度；請補充有出處的具體數據。' });
     // 權威引用
-    add(cG, { id: 'cite-src', title: '引用權威來源', status: authorityLinks.length >= 2 ? 'pass' : authorityLinks.length === 1 || externalLinks.length >= 3 ? 'warn' : 'fail', max: 4, impact: 'medium', detail: `${authorityLinks.length} 個權威外連（政府、學術、維基、研究），共 ${externalLinks.length} 個外連。`, fix: authorityLinks.length >= 2 ? '' : '為關鍵論點附上政府、學術或產業報告來源連結，增加可信度。' });
+    add(cG, { id: 'cite-src', title: '引用權威來源', status: authorityLinks.length >= 1 ? 'pass' : 'warn', max: 3, impact: 'medium', detail: `${authorityLinks.length} 個權威外連（政府、學術、維基、研究），共 ${externalLinks.length} 個外連。`, fix: authorityLinks.length >= 1 ? '' : '為關鍵論點附上政府、學術或產業報告來源連結，增加可信度。' });
     // 作者
     add(cG, { id: 'author', title: '作者 / 發布者資訊（E-E-A-T）', status: hasAuthor ? 'pass' : 'warn', max: 5, impact: 'medium', detail: hasAuthor ? '偵測到作者資訊。' : '未偵測到作者或撰文者資訊。', fix: hasAuthor ? '' : '標示作者姓名、專業背景與作者頁連結，並在 Article Schema 加入 author（Person）。' });
     // 更新日期
-    add(cG, { id: 'fresh', title: '內容時效性', status: latestDate ? (ageDays <= 730 ? 'pass' : 'warn') : 'warn', max: 4, impact: latestDate ? 'low' : 'medium', detail: latestDate ? `最新日期 ${latestDate.toISOString().slice(0, 10)}（約 ${ageDays} 天前）。` : '未偵測到發布/更新日期。', fix: latestDate && ageDays <= 730 ? '' : latestDate ? '內容超過兩年未更新；若主題具時效性（價格、法規、數據），請更新內容並同步 dateModified。長青內容可不必頻繁更新。' : '在頁面與 Article Schema 標示 datePublished / dateModified，讓搜尋引擎與 AI 判斷內容新舊。' });
+    add(cG, { id: 'fresh', title: '內容時效性', status: latestDate ? (ageDays <= 730 ? 'pass' : 'warn') : 'warn', max: 3, impact: latestDate ? 'low' : 'medium', detail: latestDate ? `最新日期 ${latestDate.toISOString().slice(0, 10)}（約 ${ageDays} 天前）。` : '未偵測到發布/更新日期。', fix: latestDate && ageDays <= 730 ? '' : latestDate ? '內容超過兩年未更新；若主題具時效性（價格、法規、數據），請更新內容並同步 dateModified。長青內容可不必頻繁更新。' : '在頁面與 Article Schema 標示 datePublished / dateModified，讓搜尋引擎與 AI 判斷內容新舊。' });
     // 實體 sameAs
-    add(cG, { id: 'entity', title: '品牌實體連結 sameAs', status: sameAs.length >= 2 ? 'pass' : sameAs.length === 1 ? 'warn' : 'fail', max: 4, impact: 'medium', detail: sameAs.length ? `${sameAs.length} 個：${sameAs.slice(0, 4).map(s => s.replace(/^https?:\/\/(www\.)?/, '').split('/')[0]).join('、')}` : 'Organization/Person Schema 中沒有 sameAs。', fix: sameAs.length >= 2 ? '' : '在 Organization Schema 加入 sameAs，連到 Facebook、Instagram、LinkedIn、YouTube、維基百科、Google 商家等，協助 AI 確認品牌身分。' });
+    add(cG, { id: 'entity', title: '品牌實體連結 sameAs', status: sameAs.length >= 1 ? 'pass' : 'warn', max: 3, impact: 'medium', detail: sameAs.length ? `${sameAs.length} 個：${sameAs.slice(0, 4).map(s => s.replace(/^https?:\/\/(www\.)?/, '').split('/')[0]).join('、')}` : 'Organization/Person Schema 中沒有 sameAs。', fix: sameAs.length >= 1 ? '' : '在 Organization Schema 加入 sameAs，連到 Facebook、Instagram、LinkedIn、YouTube、維基百科、Google 商家等，協助 AI 確認品牌身分。' });
     // 定義句
-    add(cG, { id: 'define', title: '清楚的定義句', status: definitionSentences.length >= 1 ? 'pass' : 'warn', max: 3, impact: 'low', detail: definitionSentences.length ? `例：「${truncUnits(clean(definitionSentences[0]), 80)}」` : '沒有偵測到「X 是指…」「X 是一種…」形式的定義句。', fix: definitionSentences.length ? '' : '在開頭用一句話定義核心主題（例：「GEO 是指針對生成式 AI 搜尋引擎的內容優化」），AI 回答「什麼是…」時最常引用此類句子。' });
+    add(cG, { id: 'define', title: '清楚的定義句', status: definitionSentences.length >= 1 ? 'pass' : 'warn', max: 2, impact: 'low', detail: definitionSentences.length ? `例：「${truncUnits(clean(definitionSentences[0]), 80)}」` : '沒有偵測到「X 是指…」「X 是一種…」形式的定義句。', fix: definitionSentences.length ? '' : '在開頭用一句話定義核心主題（例：「GEO 是指針對生成式 AI 搜尋引擎的內容優化」），讓讀者一開始就知道主題（經驗值）。' });
     // 結構化內容
-    add(cG, { id: 'struct', title: '結構化呈現（清單/表格/FAQ）', status: (lists.length + tables.length + (detectedFaqs.length ? 1 : 0)) >= 3 ? 'pass' : (lists.length + tables.length + (detectedFaqs.length ? 1 : 0)) >= 1 ? 'warn' : 'fail', max: 4, impact: 'medium', detail: `清單 ${lists.length}、表格 ${tables.length}、問答 ${detectedFaqs.length}。`, fix: '步驟用編號清單、比較用表格、疑問用 FAQ，讓 AI 能精準擷取片段。' });
+    add(cG, { id: 'struct', title: '結構化呈現（清單/表格/FAQ）', status: (lists.length + tables.length + (detectedFaqs.length ? 1 : 0)) >= 2 ? 'pass' : 'warn', max: 3, impact: 'medium', detail: `清單 ${lists.length}、表格 ${tables.length}、問答 ${detectedFaqs.length}。`, fix: '步驟用編號清單、比較用表格、疑問用 FAQ，讓讀者更快找到資訊。' });
+
+    add(cG, { id: 'gsc-ai', title: 'Search Console 生成式 AI 設定（請自行確認）', status: 'info', detail: 'Google 2026 官方指南：網站必須可被索引、可顯示摘要，並在 Search Console 的「Search 生成式 AI 功能」設定中被納入，才有資格出現在 AI Overviews / AI Mode；可用「生成式 AI 成效報告」追蹤表現。Bing Webmaster Tools 也有「AI Performance」報告可看 Copilot 引用次數。此項無法從外部檢測。' });
 
     /* ---- 11. Performance ---- */
     const cP = cat('perf', '效能指標（靜態）', '⚡', 5, 'seo', '依原始碼推估，非實測 Core Web Vitals');
@@ -747,7 +779,7 @@
     };
     const overall = weighted(cats, c => c.weight);
     const seoScore = weighted(cats.filter(c => c.group !== 'geo'), c => c.weight);
-    const geoW = { geo: 55, faq: 15, schema: 15, content: 15 };
+    const geoW = { geo: 60, faq: 10, schema: 15, content: 15 };
     const geoScore = weighted(cats.filter(c => geoW[c.id]), c => geoW[c.id]);
 
     /* ---- 資料彙整 ---- */
