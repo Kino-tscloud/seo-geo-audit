@@ -1,0 +1,10 @@
+# SEO / GEO 網站健檢工具
+
+> 免費的純前端網站健檢工具，檢查 TDK、H1–H6 標籤、Schema 結構化資料、FAQPage、AI 爬蟲存取與 llms.txt，提供 11 大類評分、優先修正清單與可直接複製的優化程式碼。
+
+- 語言：繁體中文（zh-Hant-TW）
+- 分析在使用者瀏覽器中完成，不儲存檢測資料
+
+## 主要頁面
+
+- [健檢工具首頁](https://kino-tscloud.github.io/seo-geo-audit/)：輸入網址或貼上原始碼即可檢測

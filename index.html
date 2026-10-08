@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SEO / GEO 網站健檢工具｜TDK、H 標籤、Schema、FAQ 免費評分</title>
+  <meta name="description" content="免費線上 SEO 與 GEO 網站健檢：一鍵檢查 TDK、H1–H6 標籤、Schema 結構化資料、FAQPage、AI 爬蟲與 llms.txt，提供 11 大項評分與可直接複製的優化程式碼。">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+
+  <link rel="canonical" href="https://kino-tscloud.github.io/seo-geo-audit/">
+  <meta property="og:url" content="https://kino-tscloud.github.io/seo-geo-audit/">
+  <meta name="theme-color" content="#060914">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="SEO / GEO 健檢">
+  <meta property="og:title" content="SEO / GEO 網站健檢工具｜免費評分與優化建議">
+  <meta property="og:description" content="檢查 TDK、H 標籤、Schema、FAQPage、AI 搜尋可見度，產出評分報告與優化程式碼。">
+  <meta property="og:image" content="https://kino-tscloud.github.io/seo-geo-audit/images/og-cover.png">
+  <meta property="og:locale" content="zh_TW">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="images/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@500;600&display=swap">
+  <link rel="stylesheet" href="css/style.css?v=3">
+  <script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',JSON.parse(t))}catch(e){}</script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "SEO / GEO 網站健檢工具",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Any (瀏覽器)",
+        "inLanguage": "zh-Hant-TW",
+        "description": "檢查 TDK、H 標籤、Schema 結構化資料、FAQPage 與 AI 搜尋可見度（GEO），提供分項評分與優化建議。",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "TWD" }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "什麼是 GEO（生成式引擎優化）？",
+            "acceptedAnswer": { "@type": "Answer", "text": "GEO（Generative Engine Optimization）是指針對 ChatGPT、Perplexity、Gemini、Google AI Overviews 等生成式 AI 搜尋引擎所做的內容優化，目標是讓網站內容更容易被 AI 理解、擷取並引用為答案來源。" }
+          },
+          {
+            "@type": "Question",
+            "name": "SEO 與 GEO 有什麼不同？",
+            "acceptedAnswer": { "@type": "Answer", "text": "SEO 的目標是在搜尋結果頁取得好排名並獲得點擊；GEO 的目標是成為 AI 回答中被引用的來源。兩者基礎相同（可抓取、結構清楚、內容可信），但 GEO 更重視答案先行的段落、具體數據、問答結構、品牌實體與 AI 爬蟲存取權限。" }
+          },
+          {
+            "@type": "Question",
+            "name": "為什麼有些網址無法檢測？",
+            "acceptedAnswer": { "@type": "Answer", "text": "本工具是純前端網頁，需透過公開 CORS 代理讀取目標網址。若網站有防火牆、Cloudflare 驗證或代理暫時無法使用，就可能失敗。此時可在瀏覽器開啟目標網頁、按 Ctrl+U 檢視原始碼並全選複製，改用「貼上原始碼」模式檢測。" }
+          },
+          {
+            "@type": "Question",
+            "name": "分數是怎麼計算的？",
+            "acceptedAnswer": { "@type": "Answer", "text": "工具共執行 11 大類、約 70 項檢查。每項依通過、警告、未通過給分，計算各類別分數後依權重加權得出總分；SEO 分數排除 GEO 類別，GEO 分數則由 AI 可見度、FAQ、Schema、內容品質加權而成。" }
+          },
+          {
+            "@type": "Question",
+            "name": "FAQPage Schema 現在還有用嗎？",
+            "acceptedAnswer": { "@type": "Answer", "text": "自 2023 年起 Google 只對政府與醫療等權威網站顯示 FAQ 複合式結果，但 FAQPage 結構化資料仍能幫助 AI 搜尋引擎理解問答關係，對 GEO 仍有正面效果，且頁面上的問答內容本身就是 AI 最常引用的格式。" }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <div class="bg-fx" aria-hidden="true"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div><div class="grid"></div><div class="noise"></div></div>
+
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="./" aria-label="SEO / GEO 健檢 首頁">
+        <img src="images/logo.svg" alt="SEO GEO 健檢標誌" width="36" height="36">
+        <span>SEO / GEO 健檢<small>網站搜尋 + AI 可見度分析</small></span>
+      </a>
+      <nav class="header-nav" aria-label="主選單">
+        <a href="#how">檢測項目</a>
+        <a href="#scoring">評分方式</a>
+        <a href="#faq">常見問題</a>
+        <button class="icon-btn" id="themeBtn" type="button" aria-label="切換深淺色主題" title="切換主題">◐</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="float-chip fc1"><i class="bg-good">✓</i><span>FAQPage 已偵測<small>8 組問答 · 可一鍵產生</small></span></div>
+        <div class="float-chip fc2"><i class="bg-info">🤖</i><span>OAI-SearchBot<small>允許存取 · ChatGPT 搜尋</small></span></div>
+        <div class="float-chip fc3"><i class="bg-warn">!</i><span>標題寬度 72<small>建議 30–60</small></span></div>
+
+        <span class="eyebrow reveal"><b>NEW</b>AI 搜尋時代的網站健康檢查</span>
+        <h1 class="reveal" style="--d:.08s">讓網站被 <span class="grad">Google</span> 找到<br>也被 <span class="rotator" id="rotator"><span class="grad on">ChatGPT</span><span class="grad">Perplexity</span><span class="grad">Gemini</span><span class="grad">Claude</span><span class="grad">Copilot</span></span> 引用</h1>
+        <p class="lead reveal" style="--d:.16s">輸入網址，一次檢查 TDK、H1–H6 標籤、Schema 結構化資料、FAQPage、AI 爬蟲與 llms.txt，取得 11 大項評分、優先修正清單與可直接複製的優化程式碼。</p>
+        <div class="pill-row reveal" style="--d:.22s" aria-hidden="true">
+          <span class="pill">🏷️ TDK</span><span class="pill">🔠 H 標籤</span><span class="pill">🧩 Schema</span><span class="pill">❓ FAQPage</span>
+          <span class="pill">🤖 AI 爬蟲</span><span class="pill">📄 llms.txt</span><span class="pill">🎓 E-E-A-T</span><span class="pill">📣 Open Graph</span>
+        </div>
+
+        <form class="audit-card reveal" style="--d:.3s" id="auditForm" novalidate>
+          <div class="mode-tabs" role="tablist">
+            <button type="button" class="active" data-mode="url" role="tab" aria-selected="true">🌐 網址檢測</button>
+            <button type="button" data-mode="html" role="tab" aria-selected="false">📋 貼上原始碼</button>
+          </div>
+
+          <div id="modeUrl">
+            <div class="field">
+              <label for="urlInput">要檢測的網址</label>
+              <div class="input-wrap"><span class="ico">🔗</span><input class="input" id="urlInput" type="url" inputmode="url" placeholder="https://www.example.com/" autocomplete="url"></div>
+            </div>
+          </div>
+          <div id="modeHtml" class="hide">
+            <div class="field">
+              <label for="htmlInput">網頁 HTML 原始碼</label>
+              <textarea class="input" id="htmlInput" placeholder="在目標網頁按 Ctrl+U（Mac：⌥⌘U）→ 全選複製 → 貼到這裡"></textarea>
+            </div>
+            <div class="field">
+              <label for="baseInput">原始網址（選填，用於判斷內外連結與 HTTPS）</label>
+              <input class="input" id="baseInput" type="url" placeholder="https://www.example.com/page">
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="kwInput">目標關鍵字（選填）</label>
+            <div class="input-wrap"><span class="ico">🎯</span><input class="input" id="kwInput" type="text" placeholder="例如：台北牙醫推薦"></div>
+            <span class="hint">填入後會額外檢查關鍵字在標題、描述、H1、內文中的佈局與密度。</span>
+          </div>
+
+          <div class="actions">
+            <button class="btn btn-primary" id="runBtn" type="submit">🔍 開始健檢</button>
+            <button class="btn btn-ghost" id="demoBtn" type="button">✨ 載入範例頁面</button>
+          </div>
+          <p class="note">網址模式會透過公開 CORS 代理讀取頁面與 robots.txt / sitemap.xml / llms.txt；若讀取失敗，請改用「貼上原始碼」。所有分析都在你的瀏覽器中完成。</p>
+          <div class="recent" id="recent"></div>
+        </form>
+
+        <div class="progress" id="progress" aria-live="polite"><ol id="progressList"></ol></div>
+        <div id="alertBox"></div>
+
+        <div class="stats-strip reveal" style="--d:.1s">
+          <div><b class="grad" data-count="70">70</b><span>+ 檢測項目</span></div>
+          <div><b class="grad" data-count="11">11</b><span>大類加權評分</span></div>
+          <div><b class="grad" data-count="14">14</b><span>種 AI 爬蟲檢查</span></div>
+          <div><b class="grad" data-count="100">100</b><span>% 瀏覽器端分析</span></div>
+        </div>
+
+        <div class="marquee" aria-hidden="true"><div class="track" id="marquee"></div></div>
+      </div>
+    </section>
+
+    <!-- ================= 結果 ================= -->
+    <section id="results" aria-label="健檢結果">
+      <div class="container">
+        <div class="result-head">
+          <div>
+            <h2>健檢報告</h2>
+            <div class="meta" id="resMeta"></div>
+          </div>
+          <div class="actions no-print">
+            <button class="btn btn-ghost btn-sm" id="printBtn" type="button">🖨️ 列印 / 存 PDF</button>
+            <button class="btn btn-ghost btn-sm" id="mdBtn" type="button">⬇️ Markdown 報告</button>
+            <button class="btn btn-ghost btn-sm" id="jsonBtn" type="button">⬇️ JSON</button>
+          </div>
+        </div>
+
+        <div class="score-grid">
+          <div class="card score-card main spot" id="scoreOverall"></div>
+          <div class="card score-card spot" id="scoreSeo"></div>
+          <div class="card score-card spot" id="scoreGeo"></div>
+        </div>
+        <div class="stat-row" id="statRow"></div>
+
+        <nav class="tabs" id="tabs" aria-label="報告分頁">
+          <button class="active" data-tab="overview">總覽</button>
+          <button data-tab="checks">詳細檢查 <span class="count" id="cntChecks"></span></button>
+          <button data-tab="recs">優化建議 <span class="count" id="cntRecs"></span></button>
+          <button data-tab="code">程式碼產生器</button>
+          <button data-tab="data">原始資料</button>
+        </nav>
+
+        <div class="tab-panel active" data-panel="overview">
+          <div class="two-col">
+            <div class="card">
+              <h3>各項評分</h3>
+              <div class="cat-list" id="catList" style="grid-template-columns:1fr"></div>
+            </div>
+            <div class="stack">
+              <div class="card">
+                <h3>Google 搜尋結果預覽</h3>
+                <div class="serp-switch no-print">
+                  <button class="chip active" data-serp="desktop" type="button">桌機</button>
+                  <button class="chip" data-serp="mobile" type="button">手機</button>
+                </div>
+                <div id="serpBox"></div>
+              </div>
+              <div class="card">
+                <h3>前 5 項優先修正</h3>
+                <div id="topFix"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-panel" data-panel="checks">
+          <div class="filter-bar no-print" id="checkFilter">
+            <button class="chip active" data-f="all" type="button">全部</button>
+            <button class="chip" data-f="fail" type="button">❌ 未通過</button>
+            <button class="chip" data-f="warn" type="button">⚠️ 警告</button>
+            <button class="chip" data-f="pass" type="button">✅ 通過</button>
+            <button class="chip" data-f="info" type="button">ℹ️ 資訊</button>
+          </div>
+          <p class="basis-legend">依據來源：
+            <span class="basis basis-g">官方規範</span> Google 或官方文件明文說明
+            <span class="basis basis-p">最佳實務</span> 業界普遍認同，非排名規則
+            <span class="basis basis-h">經驗值</span> 參考數字，沒有官方標準
+          </p>
+          <div id="checkList"></div>
+        </div>
+
+        <div class="tab-panel" data-panel="recs">
+          <div class="card" id="recList"></div>
+        </div>
+
+        <div class="tab-panel" data-panel="code">
+          <div id="codeList"></div>
+        </div>
+
+        <div class="tab-panel" data-panel="data">
+          <div id="dataList" class="stack"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 說明區 ================= -->
+    <section class="section" id="how">
+      <div class="container">
+        <span class="kicker reveal">What we check</span>
+        <h2 class="reveal">一次看懂 SEO 與 GEO 的 <span class="grad">70+ 項指標</span></h2>
+        <p class="sub reveal">涵蓋傳統 SEO 基本功與生成式 AI 搜尋（GEO）的關鍵訊號，每一項都附上原因與修正方法。</p>
+        <div class="feature-grid">
+          <article class="feature spot hl reveal"><span class="tagx">重點</span><div class="fi">🤖</div><h3>GEO / AI 可見度</h3><p>14 種 AI 爬蟲存取、llms.txt、答案先行段落、統計數據、作者、時效、sameAs 品牌實體。</p></article>
+          <article class="feature spot reveal" style="--d:.06s"><div class="fi">🏷️</div><h3>TDK 標題與描述</h3><p>Title、Meta Description、Keywords 的存在、長度（以中文寬度計算）、重複與關鍵字佈局。</p></article>
+          <article class="feature spot reveal" style="--d:.12s"><div class="fi">🔠</div><h3>H 標籤結構</h3><p>H1 唯一性、H2 段落、階層跳級、空白標題，並畫出完整標題樹。</p></article>
+          <article class="feature spot reveal"><div class="fi">🧩</div><h3>Schema 結構化資料</h3><p>解析 JSON-LD、驗證語法與必要欄位，檢查 Organization、WebSite、Breadcrumb 等。</p></article>
+          <article class="feature spot hl reveal" style="--d:.06s"><span class="tagx">一鍵產生</span><div class="fi">❓</div><h3>FAQPage</h3><p>驗證 FAQ Schema 結構與可見性，並從頁面自動擷取問答、一鍵產生 JSON-LD 與 HTML。</p></article>
+          <article class="feature spot reveal" style="--d:.12s"><div class="fi">⚙️</div><h3>技術 SEO</h3><p>HTTPS、Canonical、noindex、viewport、lang、robots.txt、sitemap.xml、語意標籤。</p></article>
+          <article class="feature spot reveal"><div class="fi">📝</div><h3>內容品質</h3><p>字數、文字比例、段落、清單表格、句長可讀性、關鍵字密度與熱門詞。</p></article>
+          <article class="feature spot reveal" style="--d:.06s"><div class="fi">🖼️</div><h3>圖片與連結</h3><p>ALT、寬高、lazy、WebP/AVIF；內外連結、錨點文字、noopener。</p></article>
+          <article class="feature spot reveal" style="--d:.12s"><div class="fi">📣</div><h3>社群與效能</h3><p>Open Graph / Twitter Card、阻塞腳本、資源數量與 HTML 大小。</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="scoring" style="padding-top:20px">
+      <div class="container">
+        <span class="kicker reveal">Scoring</span>
+        <h2 class="reveal">透明的評分方式</h2>
+        <p class="sub reveal">每項檢查依「通過＝滿分、警告＝半分、未通過＝0 分」計算，資訊類不計分；類別分數再依權重加權成總分。</p>
+        <div class="weights reveal">
+          <div><span class="wl">🤖 GEO / AI 搜尋可見度 <b>18%</b></span><span class="wbar"><i style="width:100%"></i></span></div>
+          <div><span class="wl">🏷️ TDK 標題與描述 <b>15%</b></span><span class="wbar"><i style="width:83%"></i></span></div>
+          <div><span class="wl">🧩 結構化資料 Schema <b>13%</b></span><span class="wbar"><i style="width:72%"></i></span></div>
+          <div><span class="wl">🔠 H 標籤結構 <b>12%</b></span><span class="wbar"><i style="width:67%"></i></span></div>
+          <div><span class="wl">📝 內容品質 <b>12%</b></span><span class="wbar"><i style="width:67%"></i></span></div>
+          <div><span class="wl">⚙️ 技術 SEO <b>12%</b></span><span class="wbar"><i style="width:67%"></i></span></div>
+          <div><span class="wl">❓ FAQPage 常見問答 <b>8%</b></span><span class="wbar"><i style="width:44%"></i></span></div>
+          <div><span class="wl">🖼️ 圖片優化 <b>8%</b></span><span class="wbar"><i style="width:44%"></i></span></div>
+          <div><span class="wl">🔗 連結結構 <b>7%</b></span><span class="wbar"><i style="width:39%"></i></span></div>
+          <div><span class="wl">📣 社群分享 OG <b>5%</b></span><span class="wbar"><i style="width:28%"></i></span></div>
+          <div><span class="wl">⚡ 效能指標 <b>5%</b></span><span class="wbar"><i style="width:28%"></i></span></div>
+        </div>
+        <div class="grades reveal">
+          <span class="bg-good">A+ ≥ 90</span><span class="bg-good">A ≥ 80</span><span class="bg-info">B ≥ 70</span>
+          <span class="bg-warn">C ≥ 60</span><span class="bg-warn">D ≥ 50</span><span class="bg-bad">F &lt; 50</span>
+        </div>
+        <p class="sub reveal" style="margin-top:22px;margin-bottom:0">每一項檢查都標示依據來源：<span class="basis basis-g">官方規範</span>、<span class="basis basis-p">最佳實務</span>、<span class="basis basis-h">經驗值</span>。Google 已表示不採用的項目（meta keywords、llms.txt、文字比例）只列為資訊，不計分。</p>
+      </div>
+    </section>
+
+    <section class="section" id="faq" style="padding-top:20px">
+      <div class="container" style="max-width:860px">
+        <span class="kicker reveal">FAQ</span>
+        <h2 class="reveal">常見問題</h2>
+        <p class="sub reveal">關於 SEO、GEO 與本工具的使用說明。</p>
+        <div class="faq-list reveal">
+          <details open>
+            <summary>什麼是 GEO（生成式引擎優化）？</summary>
+            <p>GEO（Generative Engine Optimization）是指針對 ChatGPT、Perplexity、Gemini、Google AI Overviews 等生成式 AI 搜尋引擎所做的內容優化，目標是讓網站內容更容易被 AI 理解、擷取並引用為答案來源。</p>
+          </details>
+          <details>
+            <summary>SEO 與 GEO 有什麼不同？</summary>
+            <p>SEO 的目標是在搜尋結果頁取得好排名並獲得點擊；GEO 的目標是成為 AI 回答中被引用的來源。兩者基礎相同（可抓取、結構清楚、內容可信），但 GEO 更重視答案先行的段落、具體數據、問答結構、品牌實體與 AI 爬蟲存取權限。</p>
+          </details>
+          <details>
+            <summary>為什麼有些網址無法檢測？</summary>
+            <p>本工具是純前端網頁，需透過公開 CORS 代理讀取目標網址。若網站有防火牆、Cloudflare 驗證或代理暫時無法使用，就可能失敗。此時可在瀏覽器開啟目標網頁、按 Ctrl+U 檢視原始碼並全選複製，改用「貼上原始碼」模式檢測。</p>
+          </details>
+          <details>
+            <summary>分數是怎麼計算的？</summary>
+            <p>工具共執行 11 大類、約 70 項檢查。每項依通過、警告、未通過給分，計算各類別分數後依權重加權得出總分；SEO 分數排除 GEO 類別，GEO 分數則由 AI 可見度、FAQ、Schema、內容品質加權而成。</p>
+          </details>
+          <details>
+            <summary>FAQPage Schema 現在還有用嗎？</summary>
+            <p>自 2023 年起 Google 只對政府與醫療等權威網站顯示 FAQ 複合式結果，但 FAQPage 結構化資料仍能幫助 AI 搜尋引擎理解問答關係，對 GEO 仍有正面效果，且頁面上的問答內容本身就是 AI 最常引用的格式。</p>
+          </details>
+        </div>
+
+        <div class="cta-band reveal" style="margin-top:44px">
+          <h2>現在就幫網站做一次健檢</h2>
+          <p>幾秒鐘取得完整報告，知道下一步該修什麼。</p>
+          <a class="btn btn-primary" href="#auditForm">🚀 開始免費檢測</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      SEO / GEO 網站健檢工具 · 純前端分析，資料不會上傳到我們的伺服器 · 檢測結果僅供參考，實際排名與 AI 引用受多種因素影響
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status"></div>
+
+  <script src="js/audit.js?v=3" defer></script>
+  <script src="js/demo.js?v=3" defer></script>
+  <script src="js/app.js?v=3" defer></script>
+</body>
+</html>

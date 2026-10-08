@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kino-tscloud.github.io/seo-geo-audit/sitemap.xml
